@@ -68,6 +68,37 @@
    ```
    The demo launches at `http://localhost:7860`.
 
+---
+
+### **Running with uv (Recommended)**
+
+[`uv`](https://github.com/astral-sh/uv) is a fast Python package manager that provides fully reproducible installs via a lock file. It is the recommended way to run Harm Bench.
+
+**Step 1 — Install uv**
+```bash
+curl -Ls https://astral.sh/uv/install.sh | sh
+```
+
+**Step 2 — Clone the repository**
+```bash
+git clone https://github.com/PRITHIVSAKTHIUR/Qwen-Image-Edit-2511-LoRAs-Fast-Lazy-Load.git
+cd Qwen-Image-Edit-2511-LoRAs-Fast-Lazy-Load
+```
+
+**Step 3 — Initialize the project and install dependencies**
+```bash
+uv init
+uv add -r requirements.txt
+```
+This resolves all packages and generates a `uv.lock` file for reproducible installs.
+
+**Step 4 — Run the script**
+```bash
+uv run python app.py
+```
+
+---
+
 ## Usage
 
 1. **Upload Images**: Use gallery to add one or more images (e.g., person + pose reference).
