@@ -34,12 +34,22 @@ from qwenimage.qwen_fa3_processor import QwenDoubleStreamAttnProcessorFA3
 
 dtype = torch.bfloat16
 
+if torch.cuda.is_available():
+    dtype = torch.bfloat16
+    transformer_load_kwargs = {"torch_dtype": dtype, "device_map": "cuda"}
+else:
+    dtype = torch.bfloat16
+    transformer_load_kwargs = {
+        "torch_dtype": dtype,
+        "device_map": "cpu",
+        "low_cpu_mem_usage": True,
+    }
+
 pipe = QwenImageEditPlusPipeline.from_pretrained(
     "Qwen/Qwen-Image-Edit-2511",
     transformer=QwenImageTransformer2DModel.from_pretrained(
         "prithivMLmods/Qwen-Image-Edit-Rapid-AIO-V19",
-        torch_dtype=dtype,
-        device_map="cuda",
+        **transformer_load_kwargs,
     ),
     torch_dtype=dtype,
 ).to(device)
